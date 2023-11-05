@@ -57,11 +57,27 @@ class InscriptionController extends Controller
     public function update(InscriptionRequest $request, Inscription $inscription)
 {
     try {
-        $inscription->update($request->validated());
+        $data = $request->validated();
+        $value = Inscription::findOrFail($data['inscription_id']);
+        $inscription->etudiant_id = $value->etudiant_id;
+        $inscription->formation_id = $data['formation_id'];
+        $inscription->niveau_id = $data['niveau_id'];
+        $inscription->annee_academique_id = $data['annee_academique_id'];
+        $inscription->update();
+
+        $etudiant = Etudiant::findOrfail($inscription->etudiant_id);
+        $etudiant->nom = $data['nom'];
+        $etudiant->prenom = $data['prenom'];
+        $etudiant->ine = $data['ine'];
+        $etudiant->date_de_naissance = $data['date_de_naissance'];
+        $etudiant->lieu_de_naissance = $data['lieu_de_naissance'];
+        $etudiant->adresse = $data['adresse'];
+        $etudiant->sexe = $data['sexe'] ?? "";
+        $etudiant->update();
 
         return new InscriptionResource($inscription);
     } catch (\Exception $e) {
-        return response()->json(['error' => 'Inscription introuvable.'], 404);
+        return response()->json(['error' => 'Inscription introuvable. '.$e], 404);
     }
 }
 

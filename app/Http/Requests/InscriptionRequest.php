@@ -22,10 +22,17 @@ class InscriptionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'etudiant_id' => 'required|exists:etudiants,id',
-            'formation_id' => 'required|exists:formations,id',
-            'niveau_id' => 'required|exists:niveaux,id',
-            'annee_academique_id' => 'required|exists:annee_academiques,id',
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'ine' => 'required|string|max:255',
+            'formation_id' => 'required',
+            'inscription_id' => 'required',
+            'niveau_id' => 'required',
+            'annee_academique_id' => 'required',
+            'date_de_naissance' => 'required|date|before_or_equal:'.now()->subYears(15)->format('Y-m-d'),
+            'lieu_de_naissance' => 'required|string',
+            'adresse' => 'required|string|max:255',
+            'sexe' => 'string'
         ];
     }
 }
