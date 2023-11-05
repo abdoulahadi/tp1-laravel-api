@@ -16,10 +16,10 @@ class InscriptionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'etudiant_id' => $this->etudiant_id,
-            'formation_id' => $this->formation_id,
-            'niveau_id' => $this->niveau_id,
-            'annee_academique_id' => $this->annee_academique_id,
+            'etudiant' => new EtudiantResource($this->etudiant),
+            'formation' => new FormationResource($this->formation),
+            'niveau' => new NiveauResource($this->niveau),
+            'annee_academique' => new AnneeAcademiqueResource($this->anneeAcademique),            
             'createdAt' => $this->created_at->format('Y-m-d H:i:s'),
             'updatedAt' => $this->updated_at->format('Y-m-d H:i:s'),
         ];

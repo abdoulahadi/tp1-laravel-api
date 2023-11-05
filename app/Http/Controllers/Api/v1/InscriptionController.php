@@ -15,7 +15,7 @@ class InscriptionController extends Controller
      */
     public function index()
     {
-        $inscriptions = Inscription::all();
+        $inscriptions = Inscription::with(['etudiant', 'formation', 'niveau', 'anneeAcademique'])->get();
     return InscriptionResource::collection($inscriptions);
     }
 

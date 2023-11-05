@@ -19,7 +19,7 @@ class EtudiantResource extends JsonResource
             'nom' => $this->nom,
             'prenom' => $this->prenom,
             'ine' => $this->ine,
-            'code_etudiant' => $this->code_etudiant,
+            'codeEtudiant' => $this->code_etudiant,
             'dateDeNaissance' => $this->date_de_naissance,
             'adresse' => $this->adresse,
             'email' => $this->email,

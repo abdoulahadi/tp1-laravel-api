@@ -12,21 +12,21 @@ class Inscription extends Model
 
     public function etudiant()
     {
-        return $this->belongsTo(Etudiant::class);
+        return $this->belongsTo(Etudiant::class, 'etudiant_id');
     }
 
     public function formation()
     {
-        return $this->belongsTo(Formation::class);
+        return $this->belongsTo(Formation::class,'formation_id');
     }
 
     public function niveau()
     {
-        return $this->belongsTo(Niveau::class);
+        return $this->belongsTo(Niveau::class,'niveau_id');
     }
 
     public function anneeAcademique()
     {
-        return $this->belongsTo(AnneeAcademique::class);
+        return $this->belongsTo(AnneeAcademique::class,'annee_academique_id');
     }
 }
