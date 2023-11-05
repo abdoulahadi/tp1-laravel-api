@@ -24,7 +24,7 @@ class EtudiantResource extends JsonResource
             'adresse' => $this->adresse,
             'email' => $this->email,
             'createdAt' => $this->created_at->format('Y-m-d H:i:s'),
-            'updatedAt' => $this->updated_at->format('Y-m-d H:i:s'),
+            'updatedAt' => $this->updated_at->format('Y-m-d H:i:s')
         ];
     }
 }

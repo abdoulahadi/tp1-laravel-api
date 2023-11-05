@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InscriptionRequest;
 use App\Http\Resources\InscriptionResource;
+use App\Models\Etudiant;
 use App\Models\Inscription;
 use Illuminate\Http\Request;
 
@@ -71,7 +72,10 @@ class InscriptionController extends Controller
     public function destroy(Inscription $inscription)
 {
     if ($inscription) {
+        $idEtudiant =  $inscription->etudiant->id;
         $inscription->delete();
+        $etudiant = Etudiant::findOrfail($idEtudiant);
+        $etudiant->delete();
         return response()->json(['message' => 'l\'inscription supprimée avec succès'], 200);
     } else {
         return response()->json(['message' => 'L\'inscription n\'existe pas.'], 404);

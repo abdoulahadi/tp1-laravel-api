@@ -29,11 +29,10 @@ class EtudiantRequest extends FormRequest
             'formation_id' => 'required',
             'niveau_id' => 'required',
             'annee_academique_id' => 'required',
-            'date_de_naissance' => 'required|date',
+            'date_de_naissance' => 'required|date|before_or_equal:'.now()->subYears(15)->format('Y-m-d'),
             'lieu_de_naissance' => 'required|string',
             'adresse' => 'required|string|max:255',
-            'sexe' => 'required|string',
-            // 'email' => 'required|email|unique:etudiants,email,' . $this->id,
+            'sexe' => 'required|string'
         ];
     }
 }

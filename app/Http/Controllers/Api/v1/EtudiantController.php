@@ -17,6 +17,8 @@ class EtudiantController extends Controller
     public function index()
 {
     $etudiants = Etudiant::all();
+    
+
     return EtudiantResource::collection($etudiants);
 }
 
@@ -65,7 +67,7 @@ class EtudiantController extends Controller
     {
         try {
             $etudiant = Etudiant::findOrFail($id);
-            return new EtudiantResource($etudiant);
+            return $etudiant->inscription()->id;
         } catch (\Exception $e) {
             return response()->json(['error' => 'Étudiant non trouvé'], 404);
         }
