@@ -25,4 +25,23 @@ class Etudiant extends Model
 
         return $code;
     }
+
+    public static function generateUniqueProfessionalEmail($prenom, $nom)
+{
+    $prenom = strtolower(str_replace(' ', '-', $prenom));
+    $nom = strtolower(str_replace(' ', '-', $nom));
+    $baseEmail = $nom . '.' . $prenom ; 
+    $endEmail = "@tp1-laravel.com";
+    $count = 1;
+    $email = $baseEmail . $endEmail;
+
+
+    while (Etudiant::where('email', $email)->exists()) {
+        $email = $baseEmail . $count . $endEmail;
+        $count++;
+    }
+
+    return $email;
+}
+
 }

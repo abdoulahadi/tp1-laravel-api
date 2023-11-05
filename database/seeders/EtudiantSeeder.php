@@ -20,6 +20,7 @@ class EtudiantSeeder extends Seeder
                 'nom' => 'Nom' . $i,
                 'prenom' => 'Prenom' . $i,
                 'ine' => 'INE' . $i,
+                'image' => 'avatar' . $i .'.png',
                 'code_etudiant' => Etudiant::generateUniqueCode('32'), 
                 'date_de_naissance' => now()->subYears(20)->addDays($i),
                 'lieu_de_naissance' => 'Lieu'.$i,

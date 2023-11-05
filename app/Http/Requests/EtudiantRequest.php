@@ -25,9 +25,15 @@ class EtudiantRequest extends FormRequest
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'ine' => 'required|string|max:255',
+            'promo' => 'required',
+            'formation_id' => 'required',
+            'niveau_id' => 'required',
+            'annee_academique_id' => 'required',
             'date_de_naissance' => 'required|date',
+            'lieu_de_naissance' => 'required|string',
             'adresse' => 'required|string|max:255',
-            'email' => 'required|email|unique:etudiants,email,' . $this->id,
+            'sexe' => 'required|string',
+            // 'email' => 'required|email|unique:etudiants,email,' . $this->id,
         ];
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EtudiantRequest;
 use App\Http\Resources\EtudiantResource;
 use App\Models\Etudiant;
+use App\Models\Inscription;
 use Illuminate\Http\Request;
 
 class EtudiantController extends Controller
@@ -27,15 +28,35 @@ class EtudiantController extends Controller
     $data = $request->validated();
 
     $data['code_etudiant'] = Etudiant::generateUniqueCode($data['promo']);
+    $data['email'] = Etudiant::generateUniqueProfessionalEmail($data['prenom'],$data['nom']);
 
-    $etudiant = Etudiant::create($data);
+    $etudiant = new Etudiant;
+    $etudiant->nom = $data['nom'];
+    $etudiant->prenom = $data['prenom'];
+    $etudiant->ine = $data['ine'];
+    $etudiant->code_etudiant = $data['code_etudiant'];
+    $etudiant->date_de_naissance = $data['date_de_naissance'];
+    $etudiant->lieu_de_naissance = $data['lieu_de_naissance'];
+    $etudiant->adresse = $data['adresse'];
+    $etudiant->sexe = $data['sexe'];
+    $etudiant->email = $data['email'];
+    $etudiant->save();
 
     if ($etudiant) {
-        return new EtudiantResource($etudiant); // Renvoie l'étudiant créé
+        
+        $inscription = new Inscription;
+        $inscription->etudiant_id = $etudiant->id;
+        $inscription->formation_id = $request->input('formation_id');
+        $inscription->niveau_id = $request->input('niveau_id');
+        $inscription->annee_academique_id = $request->input('annee_academique_id');
+        $inscription->save();
+
+        return new EtudiantResource($etudiant); 
     } else {
         return response()->json(['message' => 'Impossible de créer l\'étudiant'], 400);
     }
 }
+
 
     /**
      * Display the specified resource.

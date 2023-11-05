@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string("nom");
             $table->string("prenom");
+            $table->string("image")->default("avatar.png");
             $table->string("ine");
             $table->string("code_etudiant");
             $table->date("date_de_naissance");
-            $table->string("lieu_de_naissance");
+            $table->string("lieu_de_naissance")->default("Lieu");
             $table->string("adresse");
             $table->string("sexe");
             $table->string("email");
