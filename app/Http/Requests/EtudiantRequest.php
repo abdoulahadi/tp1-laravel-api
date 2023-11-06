@@ -26,6 +26,7 @@ class EtudiantRequest extends FormRequest
             'prenom' => 'required|string|max:255',
             'ine' => 'required|string|max:255',
             'promo' => 'required',
+            'image' => 'required|image',
             'formation_id' => 'required',
             'niveau_id' => 'required',
             'annee_academique_id' => 'required',

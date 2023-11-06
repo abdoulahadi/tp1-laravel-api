@@ -23,6 +23,7 @@ class EtudiantResource extends JsonResource
             'dateDeNaissance' => $this->date_de_naissance,
             'lieuDeNaissance' => $this->lieu_de_naissance,
             'adresse' => $this->adresse,
+            'image' => $this->image,
             'email' => $this->email,
             'sexe' => $this->sexe,
             'createdAt' => $this->created_at->format('Y-m-d H:i:s'),

@@ -38,3 +38,13 @@ Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
 });
+
+Route::get('/images/{filename}', function ($filename) {
+    $path = public_path('images/' . $filename);
+
+    if (file_exists($path)) {
+        return response()->file($path);
+    } else {
+        return response()->json(['message' => 'Image not found'], 404);
+    }
+})->where('filename', '.*');

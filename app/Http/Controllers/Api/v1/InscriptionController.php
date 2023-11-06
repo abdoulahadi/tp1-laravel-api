@@ -73,6 +73,15 @@ class InscriptionController extends Controller
         $etudiant->lieu_de_naissance = $data['lieu_de_naissance'];
         $etudiant->adresse = $data['adresse'];
         $etudiant->sexe = $data['sexe'] ?? "";
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+    
+            $imageName = $data['email'] . '.' . $image->getClientOriginalExtension();
+    
+            $image->move(public_path('images'), $imageName);
+    
+            $data['image'] = 'images/' . $imageName;
+        }
         $etudiant->update();
 
         return new InscriptionResource($inscription);

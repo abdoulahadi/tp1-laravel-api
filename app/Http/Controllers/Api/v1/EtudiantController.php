@@ -32,6 +32,16 @@ class EtudiantController extends Controller
     $data['code_etudiant'] = Etudiant::generateUniqueCode($data['promo']);
     $data['email'] = Etudiant::generateUniqueProfessionalEmail($data['prenom'],$data['nom']);
 
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+
+        $imageName = $data['email'] . '.' . $image->getClientOriginalExtension();
+
+        $image->move(public_path('images'), $imageName);
+
+        $data['image'] = 'images/' . $imageName;
+    }
+
     $etudiant = new Etudiant;
     $etudiant->nom = $data['nom'];
     $etudiant->prenom = $data['prenom'];

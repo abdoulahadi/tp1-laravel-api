@@ -26,6 +26,7 @@ class InscriptionRequest extends FormRequest
             'prenom' => 'required|string|max:255',
             'ine' => 'required|string|max:255',
             'formation_id' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
             'inscription_id' => 'required',
             'niveau_id' => 'required',
             'annee_academique_id' => 'required',
